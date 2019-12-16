@@ -21,9 +21,9 @@ class CreateOrderWatchPivotTable extends Migration
 
             // Foreign key
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade');
+            // $table->foreign('order_id')->references('id')->on('orders')->onUpdate('cascade');
             $table->foreign('watch_id')->references('id')->on('watches')->onDelete('cascade');
-            $table->foreign('watch_id')->references('id')->on('watches')->onUpdate('cascade');
+            // $table->foreign('watch_id')->references('id')->on('watches')->onUpdate('cascade');
         });
     }
 

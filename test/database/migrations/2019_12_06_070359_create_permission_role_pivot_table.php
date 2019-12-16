@@ -20,9 +20,9 @@ class CreatePermissionRolePivotTable extends Migration
 
             // Foreign key
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
-            $table->foreign('permission_id')->references('id')->on('permissions')->onUpdate('cascade');
+            // $table->foreign('permission_id')->references('id')->on('permissions')->onUpdate('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade');
+            // $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade');
 
             // Primary key
             $table->primary(['permission_id','role_id']);

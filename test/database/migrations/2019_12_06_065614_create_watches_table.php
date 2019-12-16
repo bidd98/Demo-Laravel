@@ -24,7 +24,7 @@ class CreateWatchesTable extends Migration
 
             // Foreign key
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade');
+            // $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade');
         });
     }
 

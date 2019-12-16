@@ -24,7 +24,7 @@ class CreateUserInfosTable extends Migration
 
             // Foreign key
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
         });
     }
 
