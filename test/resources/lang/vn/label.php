@@ -46,6 +46,7 @@ return [
     'btn-detail' => 'Chi tiết',
     'btn-export' => 'Xuất file Excel',
     'btn-cancle' => 'Hủy',
+    'btn-save' => 'Lưu lại',
     'btn-pay' => 'Tiến hành thanh toán',
 
     // Dash

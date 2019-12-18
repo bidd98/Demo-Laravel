@@ -16,7 +16,7 @@ class OrdersExport implements FromCollection, WithHeadings
     public function collection()
     {
 
-        $orders = Order::all();
+        $orders = Order::orderBy('order_date', 'DESC')->get();
         $export = [];
         foreach ($orders as $order) {
             $watch = $order->watches[0];

@@ -75,7 +75,7 @@
                             <div class="img-container col-4">
                                 <img src="{{$image->path}}" alt="Avatar" class="image  img-fluid img-thumbnail">
                                 <div class="overlay">
-                                    <div class="text"><button type="button" id="image-{{$image->id}}" class="btn btn-danger btn-dlt-image">Delete</button></div>
+                                    <div class="text"><button type="button" id="image-{{$image->id}}" class="btn btn-danger btn-dlt-image">{{__('label.btn-delete')}}</button></div>
                                 </div>
                             </div>
                             @endforeach
@@ -83,7 +83,7 @@
                         <input class="images-del-df" type="hidden" name="images-del[]" value=""/>
 
                         <a class="btn btn-danger" href="/watches">{{__('label.btn-cancle')}}</a>
-                        <input type="submit" class="btn btn-primary" value="Save" />
+                        <input type="submit" class="btn btn-primary" value="{{__('label.btn-save')}}" />
                         
                     </form>
                 </div>

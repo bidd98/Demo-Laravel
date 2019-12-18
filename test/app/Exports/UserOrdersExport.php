@@ -14,18 +14,19 @@ class UserOrdersExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        $orders = auth()->user()->orders;
+        $orders = auth()->user()->orders()->orderBy('order_date', 'DESC')->get();
 
         $export = [];
+
         foreach ($orders as $order) {
             $watch = $order->watches[0];
             array_push($export, [
                 __('label.order-id') => $order->id,
-                __('label.order-status') => __('label.'.$order->order_status),
+                __('label.order-status') => __('label.' . $order->order_status),
                 __('label.order-date') => $order->order_date,
                 __('label.order-total') => number_format(($watch->price * $watch->pivot->quantity
                     * (1 - $watch->discount / 100)
-                    * session('cur')->rate),1)
+                    * session('cur')->rate), 1)
                     . session('cur')->shortcut,
             ]);
         }

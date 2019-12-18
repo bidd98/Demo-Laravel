@@ -48,6 +48,7 @@ return [
     'btn-detail' => 'Detail',
     'btn-export' => 'Export Excel',
     'btn-cancle' => 'Cancle',
+    'btn-save' => 'Save',
     'btn-pay' => 'Proceed Payment',
 
     // Dash
