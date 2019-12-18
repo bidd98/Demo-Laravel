@@ -29,9 +29,8 @@ class WatchUpdateRequest extends FormRequest
             'name' => 'required',
             'price' => 'required|numeric|max:30',
             'discount' => 'required|numeric',
-            'images' => 'array',
-            'images.*' => 'nullable|mimes:jpeg,jpg,png,gif'
-            
+            'images' => 'array|min:1',
+            'images.*' => 'mimes:jpeg,jpg,png,gif'
         ];
     }
 

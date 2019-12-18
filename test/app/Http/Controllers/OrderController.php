@@ -13,8 +13,8 @@ class OrderController extends Controller
     //
     public function index(){
         // Get all orders
-        $orders = Order::paginate(Config::get('constants.item_number.orders'));
-
+        $orders = Order::orderBy('order_date', 'DESC')->paginate(Config::get('constants.item_number.orders'));
+        
         // Return to index page
         return view('orders.index', compact('orders'));
     }

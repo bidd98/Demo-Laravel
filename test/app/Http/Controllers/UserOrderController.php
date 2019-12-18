@@ -15,8 +15,8 @@ class UserOrderController extends Controller
     //
     public function index(){
         // Get Orders of this User
-        $orders = auth()->user()->orders()->paginate(Config::get('constants.item_number.orders'));
-
+        $orders = auth()->user()->orders()->orderBy('order_date', 'DESC')->paginate(Config::get('constants.item_number.orders'));
+        // dd($orders[0]->watches[0]->pivot);
         // Return to view
         return view('users.orders.index', compact('orders'));
     }

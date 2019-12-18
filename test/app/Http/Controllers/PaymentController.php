@@ -14,8 +14,6 @@ class PaymentController extends Controller
     // This method is to create an processing order
     public function confirm(OrderStoreRequest $request)
     {
-        
-
         // Get validated data
         $data = $request->validated();
 
@@ -29,29 +27,33 @@ class PaymentController extends Controller
         // Get item price
         $total = $data['price'] * $quantity;
 
+        // Convert total into VND
+        $total = $total * Currency::where('symbol', 'VND')->first()->rate;
+
         // Get current user
         $user = auth()->user();
 
-        // Create new order
-        $order = $user->orders()->create([
-            'id' => date('YmdHis'),
-            'user_id' => $user->id,
-            'order_status' => 'processing',
-            'order_date' => Carbon::now()->toDateTimeString(),
-        ]);
+        // Check if we can create new order
+        if (session('canOrder')) {
+            // Create new order
+            $order = $user->orders()->create([
+                'id' => date('YmdHis'),
+                'user_id' => $user->id,
+                'order_status' => 'processing',
+                'order_date' => Carbon::now()->toDateTimeString(),
+            ]);
 
-        // Temporary fix
-        $order->id = date('YmdHis');
-        $order->save();
+            // Temporary fix
+            $order->id = date('YmdHis');
+            $order->save();
 
-        // Attach Watch items to pivot table
-        $order->watches()->attach($watchId, array('quantity' => $quantity));
+            // Attach Watch items to pivot table
+            $order->watches()->attach($watchId, array('quantity' => $quantity));
 
-        if (session('cur')->symbol == 'USD'){
-            $total = $total * Currency::where('symbol','VND')->get()[0]->rate;
+            $id = $order->id;
+        } else {
+            $id = Order::orderBy('order_date', 'DESC')->first()->id;
         }
-        
-        $id = $order->id;
 
         return view('payments.confirm', compact('total', 'id'));
     }
@@ -63,7 +65,6 @@ class PaymentController extends Controller
         $vnp_Url = Config('app.vnp_url');
         $vnp_Returnurl = Config('app.vnp_returnUrl');
 
-
         $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = $_POST['order_desc'];
         $vnp_OrderType = $_POST['order_type'];
@@ -71,7 +72,6 @@ class PaymentController extends Controller
         $vnp_Locale = $_POST['language'];
         $vnp_BankCode = $_POST['bank_code'];
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-
 
         $inputData = array(
             "vnp_Version" => "2.0.0",
@@ -148,14 +148,11 @@ class PaymentController extends Controller
         //$secureHash = md5($vnp_HashSecret . $hashData);
         $secureHash = hash('sha256', $vnp_HashSecret . $hashData);
 
-        
-
         if ($secureHash == $vnp_SecureHash) {
 
             if ($inputData['vnp_ResponseCode'] == '00') {
                 $message = "Successful Transaction";
                 $status = 'success';
-               
             } else {
                 $message = "Unsuccessful transaction";
                 $status = 'rejected';
@@ -165,17 +162,13 @@ class PaymentController extends Controller
             $status = 'rejected';
         }
 
-
         // Get the id of order
         $id = $inputData['vnp_TxnRef'];
 
-         // Update status for this order
-         Order::find($id)->update([
+        // Update status for this order
+        Order::find($id)->update([
             'order_status' => $status,
         ]);
-
-
-
 
         return view('payments.return', compact('message'));
     }

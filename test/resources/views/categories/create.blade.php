@@ -24,7 +24,7 @@
                             <span style="color:red">{{$message}}</span>
                             @enderror
                         </div>
-
+                        <a class="btn btn-danger" href="/categories">{{__('label.btn-cancle')}}</a>
                         <input type="submit" class="btn btn-primary" value="{{__('label.btn-create')}}" />
                     </form>
 

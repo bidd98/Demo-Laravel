@@ -29,10 +29,10 @@
                             <div class="col-6">
                                 <span class="heading-primary brand">{{$watch->category->brand}}</span>
                                 <span class="heading-subprimary name">{{$watch->name}}</span>
-                                <form action="/payments/cf" method="POST">
+                                <form action="/payments/cf" method="GET">
                                     <input type="hidden" name="watch_id" value="{{$watch->id}}" />
-                                    <input type="hidden" name="price" value="{{($watch->price*(1-$watch->discount/100))*session('cur')->rate}}" />
-                                    @csrf
+                                    <input type="hidden" name="price" value="{{$watch->price*(1-$watch->discount/100)}}" />
+                                    
 
                                     <table>
                                         <thead>

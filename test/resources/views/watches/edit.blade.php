@@ -82,6 +82,7 @@
                         </div>
                         <input class="images-del-df" type="hidden" name="images-del[]" value=""/>
 
+                        <a class="btn btn-danger" href="/watches">{{__('label.btn-cancle')}}</a>
                         <input type="submit" class="btn btn-primary" value="Save" />
                         
                     </form>

@@ -62,6 +62,7 @@
                             @enderror
                         </div>
 
+                        <a class="btn btn-danger" href="/watches">{{__('label.btn-cancle')}}</a>
                         <input type="submit" class="btn btn-primary" value="{{__('label.btn-create')}}" />
                     </form>
 

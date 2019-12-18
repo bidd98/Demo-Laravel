@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">Watch</div>
+                <div class="card-header">{{__('label.vnpay')}}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,40 +16,40 @@
 
                     <div class="container">
                         <div class="header clearfix">
-                            <h3 class="text-muted">VNPAY DEMO</h3>
+                            <h3 class="text-muted">{{__('label.payment')}}</h3>
                         </div>
-                        <h3>Payment</h3>
+                        
                         <div class="table-responsive">
                             <form action="/payments/create" id="create_form" method="post">
                             @csrf
 
                                 <div class="form-group">
-                                    <label for="language">Bill type</label>
+                                    <label for="language">{{__('label.bill-type')}}</label>
                                     <select name="order_type" id="order_type" class="form-control">
                                         <!-- <option value="topup">Nạp tiền điện thoại</option> -->
-                                        <option value="billpayment">Paying bill</option>
+                                        <option value="billpayment">{{__('label.bank-transfer')}}</option>
                                         <!-- <option value="fashion">Thời trang</option>
                                         <option value="other">Khác - Xem thêm tại VNPAY</option> -->
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="order_id">Order ID</label>
+                                    <label for="order_id">{{__('label.order-id')}}</label>
                                     <input class="form-control" id="order_id" name="order_id" type="text" value="{{$id}}" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="amount">Money bill</label>
+                                    <label for="amount">{{__('label.money-bill')}}</label>
                                     <input class="form-control" type="text" value="{{number_format($total,1)}}đ" disabled/>
                                     <input class="form-control" id="amount" name="amount" type="hidden" value="{{$total}}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="order_desc">Order description</label>
-                                    <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">Description</textarea>
+                                    <label for="order_desc">{{__('label.description')}}</label>
+                                    <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2">{{__('label.description')}}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="bank_code">Bank</label>
+                                    <label for="bank_code">{{__('label.bank')}}</label>
                                     <select name="bank_code" id="bank_code" class="form-control">
                                         <!-- <option value="">Không chọn</option> -->
-                                        <option value="NCB" selected> Ngan hang NCB</option>
+                                        <option value="NCB" selected>{{__('label.NCB')}}</option>
                                         <!-- <option value="AGRIBANK"> Ngan hang Agribank</option>
                                         <option value="SCB"> Ngan hang SCB</option>
                                         <option value="SACOMBANK">Ngan hang SacomBank</option>
@@ -73,16 +73,17 @@
                                         <option value="VISA"> Thanh toan qua VISA/MASTER</option> -->
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="language">Language</label>
                                     <select name="language" id="language" class="form-control">
                                         <option value="vn">Vietnamese</option>
                                         <option value="en">English</option>
                                     </select>
-                                </div>
+                                </div> -->
+                                <input type="hidden" name="language" value="vn"/>
 
                                 <!-- <button type="submit" class="btn btn-primary" id="btnPopup">Thanh toán Popup</button> -->
-                                <button type="submit" class="btn btn-primary">Thanh toán Redirect</button>
+                                <button type="submit" class="btn btn-primary">{{__('label.btn-pay')}}</button>
 
                             </form>
                         </div>

@@ -30,13 +30,28 @@
         </div>
 
         @endif
+        @if($message == 'Successful Transaction')
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">Well done!</h4>
             <p>{{$message}}</p>
             <hr>
             <p class="mb-0"><a href="/">Keep Shopping!!!</a></p>
         </div>
-
+        @elseif ($message == 'Unsuccessful transaction')
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Opps!</h4>
+            <p>{{$message}}</p>
+            <hr>
+            <p class="mb-0"><a href="/">Keep Shopping!!!</a></p>
+        </div>
+        @else
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Opps!</h4>
+            <p>{{$message}}</p>
+            <hr>
+            <p class="mb-0"><a href="/">Keep Shopping!!!</a></p>
+        </div>
+        @endif
     </div>
 </body>
 

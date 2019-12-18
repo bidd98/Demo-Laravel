@@ -32,6 +32,13 @@ class OrderStoreRequest extends FormRequest
 
     public function messages()
     {
+        if (app()->getLocale() == 'vn') {
+            return [
+                'quantity.required' => 'Số lượng không được để trống.',
+                'quantity.min' => 'Số lượng bé nhất bằng :min',
+                'quantity.integer' => 'Số lượng phải là một số tự nhiên',
+            ];
+        }
         return [
             'quantity.min' => 'Quantity must be larger than 0',
         ];

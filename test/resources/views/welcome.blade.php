@@ -83,7 +83,7 @@
             <div id="search-div">
                 <form action="/search" method="post">
                     @csrf
-                    <input autocomplete="off" class="form-control" id="search-box" name="search" type="text" placeholder="Search" aria-label="Search">
+                    <input autocomplete="off" class="form-control" id="search-box" name="search" type="text" placeholder="{{__('label.search')}}" aria-label="Search">
                 </form>
                 <div id="search-result"></div>
             </div>

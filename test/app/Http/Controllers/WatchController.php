@@ -19,13 +19,17 @@ class WatchController extends Controller
     {
         // Get all Watches
         $watches = Watch::paginate(Config::get('constants.item_number.watches'));
-        
+
         return view('watches.index', compact('watches'));
     }
 
-    public function show($id){
+    public function show($id)
+    {
         // Get current Watch
         $watch = Watch::find($id);
+
+        // Set canOrder to true
+        session(['canOrder' => true]);
 
         // Return to show page
         return view('watches.show', compact('watch'));
@@ -79,7 +83,7 @@ class WatchController extends Controller
     }
 
 
-    public function update($id, WatchUpdateRequest $request)
+    public function update($id, WatchStoreRequest $request)
     {
         // Get the current Watch
         $watch = Watch::find($id);
@@ -90,12 +94,17 @@ class WatchController extends Controller
         // Get Images to insert if exists
         $images = $data['images'];
 
+
+
         // Get Images to delete if exists
         $imagesDel = $data['images-del'];
 
         // This block is used to delete element form
         // added image into db when we click delete button in edit section
         if ($images[0]) {
+
+            // Get Images Path array
+            $imagePaths = $this->getImagePaths($images);
 
             if ($imagesDel[0]) {
 
@@ -117,11 +126,11 @@ class WatchController extends Controller
                 $this->deleteImage($watch, $imagesDel);
             }
 
-            $this->storeImage($watch, $images);
+            $this->storeImage($watch, $imagePaths);
         } else {
 
             if ($imagesDel[0]) {
-                
+
                 $this->deleteImage($watch, $imagesDel);
             }
         }

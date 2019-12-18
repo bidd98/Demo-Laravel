@@ -7,7 +7,7 @@ return [
     'sub-heading' => 'We sale everything you need',
     'homepage' => 'Homepage',
     'market-price' => 'Market Price',
-    'discount' => 'Discount',
+    'discount' => 'Discount (%)',
     'price' => 'Price',
     'quantity' => 'Quantity',
     'watch' => 'Watch',
@@ -19,6 +19,7 @@ return [
     'password' => 'Password',
     'date' => 'Ordered Date',
     'remember' => 'Remember Me',
+    'order-id' => 'Order ID',
     'order-status' => 'Order Status',
     'order-date' => 'Order Date',
     'order-total' => 'Total',
@@ -26,6 +27,16 @@ return [
     'success' => 'Success',
     'processing' => 'Finish Payment',
     'rejected' => 'Rejected',
+    'payment' => 'Payment',
+    'search' => 'Search',
+    // Bill Type
+    'bill-type' => 'Bill Type',
+    'bank-transfer' => 'Bank transfer',
+    //------
+    'money-bill' => 'Money Bill (Default VND)',
+    'description' => 'Description',
+    'bank' => 'Bank',
+    
 
     // Button
     'btn-buy' => 'Buy',
@@ -36,6 +47,8 @@ return [
     'btn-create' => 'Create',
     'btn-detail' => 'Detail',
     'btn-export' => 'Export Excel',
+    'btn-cancle' => 'Cancle',
+    'btn-pay' => 'Proceed Payment',
 
     // Dash
     'admin-dashboard' => 'Admin Dashboard',
@@ -43,8 +56,11 @@ return [
     'categories-manage' => 'Category Management',
     'orders-manage' => 'Order Manament',
     'watch-create' => 'Create New Watch',
-    'category-create' => 'Create New Category'
+    'category-create' => 'Create New Category',
+    'vnpay' => 'Payment Gateway VNPAY',
 
+    //
+    // Bank List
+    'NCB' => 'NCB Bank',
     
-
  ];

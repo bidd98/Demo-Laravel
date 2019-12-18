@@ -30,8 +30,12 @@ class CategoryStoreRequest extends FormRequest
 
     public function messages()
     {
-        return [
-            
-        ];
+        if (app()->getLocale() == 'vn') {
+            return [
+                'brand.required' => 'Mục thương hiệu không được để  trống',
+                'brand.max' => 'Thương hiệu không được dài quá :max ký tự',
+            ];
+        }
+        return [];
     }
 }
