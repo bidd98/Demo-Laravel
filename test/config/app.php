@@ -134,6 +134,22 @@ return [
     |
     */
 
+    /*
+    |--------------------------------------------------------------------------
+    | VNPAY Integration
+    |--------------------------------------------------------------------------
+    |
+    | This service provide a convenient way to pay your items
+    |
+    */
+
+    'vnp_tmnCode' => env('VNP_TMNCODE'), // Website code at VNPAY
+    'vnp_hashSecret' => env('VNP_HASHSECRET'), // Secret hash
+    'vnp_url' => env('VNP_URL'), 
+    'vnp_returnUrl' => env('VNP_RETURNURL'),
+
+
+
     'providers' => [
 
         /*
@@ -163,6 +179,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        JD\Cloudder\CloudderServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -229,6 +246,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Cloudder' => JD\Cloudder\Facades\Cloudder::class,
 
     ],
 

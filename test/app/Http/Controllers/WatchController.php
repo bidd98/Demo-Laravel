@@ -9,6 +9,8 @@ use App\Http\Requests\WatchStoreRequest;
 use App\Http\Requests\WatchUpdateRequest;
 use Illuminate\Support\Facades\Config;
 use Intervention\Image\Facades\Image;
+use JD\Cloudder\Facades\Cloudder;
+// https://github.com/jrm2k6/cloudder
 
 class WatchController extends Controller
 {
@@ -57,7 +59,7 @@ class WatchController extends Controller
         ]);
 
         // Insert new images to this Watch
-        $this->storeImage($watch, $images);
+        $this->storeImage($watch, $imagePaths);
 
         return redirect('/watches');
     }
@@ -147,29 +149,35 @@ class WatchController extends Controller
     public function getImagePaths(array $images)
     {
         // Init array for Images Path
-        $imagesPath = array();
-
+        $imagePaths = array();
+        // dd($images);
         // Loop through each image
         foreach ($images as $image) {
 
             //Save image path to local storage and then return it
-            $imagesPathItem = $image->store('watches', 'public');
+            // $imagesPathItem = $image->store('watches', 'public');
+
+            // Save image to cdn storage and then return its path
+            $imageRealPath = $image->getRealPath();
+            // dd($imageRealPath);
+            Cloudder::upload($imageRealPath, null, [
+                'folder' => 'watches',
+            ], null);
+
+            $imagesPathItem = Cloudder::getResult()['secure_url'];
 
             // Push returned image path to array
-            array_push($imagesPath, $imagesPathItem);
+            array_push($imagePaths, $imagesPathItem);
         }
 
         // Return
-        return $imagesPath;
+        return $imagePaths;
     }
 
-    public function storeImage(Watch $watch, array $images)
+    public function storeImage(Watch $watch, $imagePaths)
     {
-        $imagePaths = $this->getImagePaths($images);
-
         //Insert each image into db
         foreach ($imagePaths as $path) {
-
             $watch->images()->create([
                 'watch_id' => $watch->id,
                 'path' => $path,

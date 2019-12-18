@@ -7,6 +7,7 @@ use App\Http\Requests\OrderStoreRequest;
 use Carbon\Carbon;
 use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class PaymentController extends Controller
 {
@@ -39,6 +40,9 @@ class PaymentController extends Controller
             'order_date' => Carbon::now()->toDateTimeString(),
         ]);
 
+        // Temporary fix
+        $order->id = date('YmdHis');
+        $order->save();
 
         // Attach Watch items to pivot table
         $order->watches()->attach($watchId, array('quantity' => $quantity));
@@ -54,10 +58,11 @@ class PaymentController extends Controller
 
     public function create()
     {
-        $vnp_TmnCode = "D0WUXYPG"; //Mã website tại VNPAY 
-        $vnp_HashSecret = "OFQKMNWMSHKHWLEGQMOHYXJIMXGWBPSI"; //Chuỗi bí mật
-        $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:11400/payments/return";
+        $vnp_TmnCode = Config('app.vnp_tmnCode'); //Mã website tại VNPAY 
+        $vnp_HashSecret = Config('app.vnp_hashSecret'); //Chuỗi bí mật
+        $vnp_Url = Config('app.vnp_url');
+        $vnp_Returnurl = Config('app.vnp_returnUrl');
+
 
         $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = $_POST['order_desc'];
@@ -114,10 +119,10 @@ class PaymentController extends Controller
     public function return()
     {
         $message = '';
-        $vnp_TmnCode = ""; //Mã website tại VNPAY 
-        $vnp_HashSecret = "OFQKMNWMSHKHWLEGQMOHYXJIMXGWBPSI"; //Chuỗi bí mật
-        $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8000/payments/return";
+        $vnp_TmnCode = Config('app.vnp_tmnCode'); //Mã website tại VNPAY 
+        $vnp_HashSecret = Config('app.vnp_hashSecret'); //Chuỗi bí mật
+        $vnp_Url = Config('app.vnp_url');
+        $vnp_Returnurl = Config('vnp_returnUrl');
 
         $vnp_SecureHash = $_GET['vnp_SecureHash'];
         $inputData = array();
@@ -164,7 +169,7 @@ class PaymentController extends Controller
         // Get the id of order
         $id = $inputData['vnp_TxnRef'];
 
-         // Update status for this order if success
+         // Update status for this order
          Order::find($id)->update([
             'order_status' => $status,
         ]);

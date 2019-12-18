@@ -37,8 +37,8 @@ class WatchUpdateRequest extends FormRequest
 
     public function messages(){
         return [
-            'name.required' => 'name is required madafaker',
-            'images.*.mimes' => 'The image must be a file of: jpeg, jpg, png, gif',
+            // 'name.required' => 'name is required madafaker',
+            // 'images.*.mimes' => 'The image must be a file of: jpeg, jpg, png, gif',
         ];
     }
 }

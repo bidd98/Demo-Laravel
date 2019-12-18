@@ -18,11 +18,11 @@
                         <div class="row">
 
                             <div class="col-6">
-                                <img class="mb-5" src="/storage/{{$watch->image}}" style="max-width: 100%">
+                                <img class="mb-5" src="{{$watch->image}}" style="max-width: 100%">
                                 
                                 @foreach($watch->images as $image)
 
-                                <img src="/storage/{{$image->path}}" style="width: 120px; height: auto"/>
+                                <img src="{{$image->path}}" style="width: 120px; height: auto"/>
 
                                 @endforeach
                             </div>

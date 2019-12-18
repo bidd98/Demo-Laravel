@@ -25,7 +25,7 @@ class CreatePermissionRolePivotTable extends Migration
             // $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade');
 
             // Primary key
-            $table->primary(['permission_id','role_id']);
+            $table->primary(['permission_id', 'role_id']);
         });
     }
 
@@ -36,6 +36,6 @@ class CreatePermissionRolePivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('permission_role_pivot');
     }
 }

@@ -73,7 +73,7 @@
                         <div class="form-group image-div">
                             @foreach($images as $image)
                             <div class="img-container col-4">
-                                <img src="/storage/{{$image->path}}" alt="Avatar" class="image  img-fluid img-thumbnail">
+                                <img src="{{$image->path}}" alt="Avatar" class="image  img-fluid img-thumbnail">
                                 <div class="overlay">
                                     <div class="text"><button type="button" id="image-{{$image->id}}" class="btn btn-danger btn-dlt-image">Delete</button></div>
                                 </div>

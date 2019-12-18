@@ -92,7 +92,7 @@
 
 
                 <div class="watch-item col-3 pb-4">
-                    <a href="/watches/{{$watch->id}}"><img src="/storage/{{$watch->image}}" style="max-width: 100%; width: 200px; height: auto;" /></a>
+                    <a href="/watches/{{$watch->id}}"><img src="{{$watch->image}}" style="max-width: 100%; width: 200px; height: auto;" /></a>
                     <div>
                         <p><b>{{$watch->category->brand}}</b> - {{$watch->name}}</p>
                         <span>{{number_format(($watch->price*(1-$watch->discount/100))*session('cur')->rate,1) . session('cur')->shortcut}}</span><span class="float-right">{{$watch->discount}}%</span>

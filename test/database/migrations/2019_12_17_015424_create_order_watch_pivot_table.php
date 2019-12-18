@@ -34,6 +34,6 @@ class CreateOrderWatchPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_watch');
+        Schema::dropIfExists('order_watch_pivot');
     }
 }

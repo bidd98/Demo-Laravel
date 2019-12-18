@@ -25,7 +25,7 @@ class CreateRoleUserPivotTable extends Migration
             // $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade');
 
             // Primary key
-            $table->primary(['user_id','role_id']);
+            $table->primary(['user_id', 'role_id']);
         });
     }
 
@@ -36,6 +36,6 @@ class CreateRoleUserPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_user');
+        Schema::dropIfExists('role_user_pivot');
     }
 }

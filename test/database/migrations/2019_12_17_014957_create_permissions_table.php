@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLoggingsTable extends Migration
+class CreatePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateLoggingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('loggings', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
+
             $table->bigIncrements('id');
-            $table->dateTime('date');
-            $table->string('client');
-            $table->string('method');
-            $table->string('url');
+            $table->string('controller', 255);
+            $table->string('method', 255);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateLoggingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loggings');
+        Schema::dropIfExists('permissions');
     }
 }

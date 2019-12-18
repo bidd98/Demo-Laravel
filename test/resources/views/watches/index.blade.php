@@ -33,7 +33,7 @@
                                 <th scope="row">{{$watch->id}}</th>
                                 <td>{{$watch->category->brand}}</td>
                                 <td>{{$watch->name}}</td>
-                                <td><img src="/storage/{{$watch->image}}" style="max-width: 100px"></td>
+                                <td><img src="{{$watch->image}}" style="max-width: 100px"></td>
                                 <td>{{$watch->price*session('cur')->rate . session('cur')->shortcut}}</td>
                                 <td>{{$watch->discount}}%</td>
                                 <td>

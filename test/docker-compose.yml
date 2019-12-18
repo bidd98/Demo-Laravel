@@ -1,0 +1,37 @@
+version: '3'
+services:
+  app:
+    image: toancong/phpup:2
+    ports:
+      - 11400:80
+      
+    volumes:
+      - .:/var/www/app
+    
+    working_dir: /var/www/app
+    environment:
+      PHP_MEM_LIMIT: -1
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./dbdata:/var/lib/mysql
+      - ./dbbackup:/var/lib/mysql-db-backup
+    environment:
+      - "MYSQL_DATABASE=demo_laravel"
+      - "MYSQL_USER=bidd"
+      - "MYSQL_PASSWORD=root"
+      - "MYSQL_ROOT_PASSWORD=root"
+    ports:
+      - "43306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      - "MYSQL_USER=bidd"
+      - "MYSQL_PASSWORD=root"
+      - "MYSQL_ROOT_PASSWORD=root"
+    links:
+      - mysql:db
+    ports:
+      - "48081:80"

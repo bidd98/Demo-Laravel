@@ -18,7 +18,7 @@
                         <div class="row">
 
                             <div class="col-6">
-                                <img src="/storage/{{$watch->image}}" style="max-width: 100%">
+                                <img src="{{$watch->image}}" style="max-width: 100%">
                             </div>
                             <div class="col-6">
                                 <span class="heading-primary brand">{{__('label.order')}}: {{$order->id}}</span>
